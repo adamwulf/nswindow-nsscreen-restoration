@@ -7,21 +7,29 @@
 //
 
 #import "AppDelegate.h"
+#import "FBCalendarWindowController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<NSWindowDelegate>
 
-@property (weak) IBOutlet NSWindow *window;
+@property (nonatomic, strong) FBCalendarWindowController *calendarWindowController;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    [[self calendarWindowController] showWindow:nil];
 }
 
+#pragma mark - NSWindowDelegate
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+- (FBCalendarWindowController *)calendarWindowController
+{
+    if (!_calendarWindowController) {
+        _calendarWindowController = [[FBCalendarWindowController alloc] initWithWindowNibName:NSStringFromClass([FBCalendarWindowController class])];
+    }
+    
+    return _calendarWindowController;
 }
 
 
